@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-const movieSchema = new mongoose,Schema({
+const movieSchema = new mongoose.Schema({
     movieposter:{type:String,required:true},
     moviename:{type:String,required:true},
     rating:{type:String,required:true},
