@@ -7,4 +7,4 @@ Amount:{type:Number,required:true},
 })
 
 const Order = mongoose.model("Order",orderSchema)
-mocule.exports = Order
+module.exports = Order

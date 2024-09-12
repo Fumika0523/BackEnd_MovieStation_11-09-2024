@@ -11,4 +11,4 @@ const contactUsSchema = new mongoose.Schema({
 })
 
 const ContactUs = mongoose.model("ContactUs",contactUsSchema)
-mocule.exports = ContactUs
+module.exports = ContactUs
