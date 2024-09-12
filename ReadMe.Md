@@ -54,6 +54,32 @@ module.exports=User
 --------------------------------------------
 moviemodel:
 ---------------------------------------------
+Creating a Model
+userModel
+movieModel
+contactusModel
+
+Public:
+Home
+About
+Service
+Contact     >Model
+Sign In     >Model  - userModel
+Sign Up     >Model  - userModel
+
+Private
+AllMovies   >Model movieModel GET
+AddMovie    >Model movieModel POST
+Edit        >Model movieModel PATCH/PUT
+Delete      >Model movieModel DELETE
+Cart >> Redux >Model orderModel
+
+cart >
+movieName:
+Rating:
+Amount:
+
+
 Fumika 
 URL:https://github.com/Fumika0523/BackEnd_MovieStation_11-09-2024
 
