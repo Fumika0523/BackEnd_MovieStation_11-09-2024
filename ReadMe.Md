@@ -10,3 +10,52 @@ db >>> connection.js
 model >>> userModel.js
 routes >> userRoutes.js
 middleware >> auth.js
+-------
+update the script
+-----------
+index.js
+
+const express = require ('express')
+const app = express()
+
+//Create a route for home page
+
+app.get('/',(req,res)=>{
+    res.send("Welcome to MovieStation")
+})
+
+const PORT = 8001
+app.listen(PORT,()=>{
+    console.log("Server Started at PORT NO",PORT)
+})
+-----------------------------
+connection with Database
+.ev         >> storing critical information which we dont want to expose
+connection.js >> mongodb connection
+index.js    >> import dotenv and connection.js
+-------------------------------------------------------
+create a model
+usermodel:
+const mongoose=require('mongoose')
+
+const userSchema = new mongoose,Schema({
+    name:{type:String,required:true},
+    age:{typr:Number,required:true},
+    phone_number:{type:Number,required:true},
+    email:{type:String,required:true},
+    password:{type:String}
+},{
+    timestamps:true
+})
+
+const User = mongoose.model("User",userSchema)
+
+module.exports=User
+--------------------------------------------
+moviemodel:
+---------------------------------------------
+Fumika 
+URL:https://github.com/Fumika0523/BackEnd_MovieStation_11-09-2024
+
+Poonam
+URL:https://github.com/PoonamChauhan229/BackEnd_MovieStation_11-09-2024
