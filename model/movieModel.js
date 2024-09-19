@@ -8,10 +8,17 @@ const movieSchema = new mongoose.Schema({
     cast:{type:String,required:true},
     trailer:{type:String,required:true},
     publishYear:{type:Number,required:true},
-    likeNum:{type:Number,required:true},
-    disLikeNum:{type:Number,required:true},
+    likeNum:{type:String,required:true},
+    disLikeNum:{type:String,required:true},
     genres:{type:String,required:true},
-    category:{type:String,required:true}
+    category:{type:String,required:true},
+    owner:{ //user ID
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User", 
+        required:true //you need the user id,
+    }
+},{
+    tymestamps:true
 })
 
 const Movie = mongoose.model("Movie",movieSchema)
