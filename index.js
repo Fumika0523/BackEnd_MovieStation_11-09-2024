@@ -5,6 +5,7 @@ dotenv.config()
 const connection=require('./db/connection')
 const movieRoutes=require('./routes/movieRoutes')
 const userRoutes = require('./routes/userRoutes')
+const enquiryRoutes = require('./routes/enquiryRoutes')
 connection()
 
 const cors = require('cors')
@@ -14,7 +15,6 @@ app.use(cors())
 const User=require('./model/userModel')
 const Movie=require('./model/movieModel')
 const Order=require('./model/orderModel')
-const ContactUs=require('./model/contactUsModel')
 
 //Multer > File/Image Upload
 //we want some data to be sent out >> what method would be used? > POST
@@ -25,6 +25,8 @@ app.get('/',(req,res)=>{
 })
 app.use(movieRoutes)
 app.use(userRoutes)
+app.use(enquiryRoutes)
+
 //server Start:
 const PORT=8001
 app.listen(PORT,()=>{

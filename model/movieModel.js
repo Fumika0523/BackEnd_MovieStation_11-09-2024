@@ -18,7 +18,7 @@ const movieSchema = new mongoose.Schema({
         required:true //you need the user id,
     }
 },{
-    tymestamps:true
+    timestamps:true
 })
 
 const Movie = mongoose.model("Movie",movieSchema)

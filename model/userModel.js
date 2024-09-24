@@ -25,6 +25,12 @@ userSchema.virtual('movieRel',{
     foreignField:"owner"
 })
 
+userSchema.virtual('enquiryRel',{
+    ref:"Enquiry",
+    localField:"_id",
+    foreignField:"owner"
+})
+
 const User = mongoose.model("User",userSchema)
 
 module.exports=User
