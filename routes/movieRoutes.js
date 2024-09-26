@@ -36,9 +36,8 @@ router.get('/movie',auth,async(req,res)=>{
     }catch(e){
         res.send({"message":"Some internal Error"})
     }
-
 })
-
+                             
 //UPDATE
 router.put('/updatemovie/:id',auth,async(req,res)=>{
     const updateMovie = await Movie.findOneAndUpdate({_id:req.params.id,owner:req.user._id},req.body,{new:true, runValidators:true})
@@ -51,6 +50,31 @@ router.put('/updatemovie/:id',auth,async(req,res)=>{
     }catch(e){
         res.send({message:"Some Internal Error Occur"})
     }
+})
+
+//Edit >> GET Movie
+router.get('/editmovie/:id',auth,async(req,res)=>{
+     try{
+        if(req.user){
+            const getMovie = await req.user.populate("movieRel")
+    if(getMovie){
+        const allMovies=req.user.movieRel
+    let movieById=allMovies.filter((element,index)=>{
+        return element._id==req.params.id
+    })
+    if(movieById.length!=0){
+        res.send(movieById)
+    }else{
+        res.send({message:"Movie Not Found,Enter the correct ID"})
+    }    
+        }
+    
+        }else{
+            res.send("User Authentication Failed")
+        }
+        }catch(e){
+            res.send({"message":"Some Internal Error"})
+        }
 })
 
 //DELETE
