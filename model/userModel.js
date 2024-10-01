@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = async function(req,res){
     const user = this
-    const token = jwt.sign({_id:user.id},"nodejs")
+    const token = jwt.sign({_id:user.id},process.env.JWT_SECRET_LEY)
     console.log(token)
     return token
 }
@@ -31,6 +31,11 @@ userSchema.virtual('enquiryRel',{
     foreignField:"owner"
 })
 
+userSchema.virtual('orderRel',{
+    ref:"Order",
+    localField:"_id",
+    foreignField:"owner"
+})
 const User = mongoose.model("User",userSchema)
 
 module.exports=User

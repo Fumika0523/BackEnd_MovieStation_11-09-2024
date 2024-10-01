@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../model/userModel')
 
+
 const auth = async(req,res,next)=>{
     console.log("Auth middleware is called")
     console.log("text",req.header('Authorization'))
