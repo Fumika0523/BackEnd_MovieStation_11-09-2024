@@ -19,25 +19,26 @@ router.post('/addmovie',auth,async(req,res)=>{
 
 //GET  
 router.get('/movie',auth,async(req,res)=>{
-        try{
+    try{
         console.log(req.user._id);
         if(req.user){
-            const getMovie= await req.user.populate("movieRel")
-            console.log("test",getMovie)   
-      
-   if(getMovie){
-    res.send({"movieData":req.user.movieRel})
-   }else{
-    res.send({"message":"Movie not added"})
-   }
-  }else{
-    res.send({"message":"User not found, signin failed!"})
-   }
-    }catch(e){
-        res.send({"message":"Some internal Error"})
+            let getMovie=await req.user.populate("movieRel")
+            console.log("test",getMovie) // res
+            if(getMovie){
+                res.send({"movieData":req.user.movieRel})
+            }else{
+                res.send({"message":"Movie not added"})
+            }
+        }else{
+            res.send({"message":"User Not Found,Sigin In Failed"})
+        }
+        
+    }
+catch(e){
+        res.send({"message":"Some Internal Error"})
     }
 })
-                             
+
 //UPDATE
 router.put('/updatemovie/:id',auth,async(req,res)=>{
     const updateMovie = await Movie.findOneAndUpdate({_id:req.params.id,owner:req.user._id},req.body,{new:true, runValidators:true})

@@ -9,17 +9,17 @@ const htmlTemplate=(name)=>{
                 <p style="font-size: 165%;">Thank you for joining MovieStation!</p>
                 <p style="font-size: 165%;">Your signup is completed and you are ready to start enjoing movies!</p>
                 
-                <a href="https://moviestation-23.netlify.app/"target="_blank" style="text-decoration: none;"><button
+                <a href="https://moviestation23.netlify.app/"target="_blank" style="text-decoration: none;"><button
                 style="background-color:rgb(245, 208, 23);height: 75%;width:50%;font-size: 200%;color:white;font-weight: bold;display: block;margin: auto;text-wrap: nowrap;border-radius: 10px;color: black;text-wrap: wrap;text-align: center; padding:1.5% 0;">Go to Explore the movies✔️</button></a>
     
             <p style="font-size: 165%;text-align: center;">Enjoy the movie!🍿📽️</p>
          
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://www.vfx-courses.com/wp-content/uploads/2020/02/h13.jpg" alt="" style="height:150px;width:32.5%"></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://wallpaper.forfun.com/fetch/be/be3f7aa111c32a314d8015c8c8c5e22b.jpeg" style="height:150px;width:32.5%" alt=""></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://images.alphacoders.com/111/1119553.jpg" style="height:150px;width:32.5%" alt=""></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://images7.alphacoders.com/112/1120946.jpg" alt="" style="height:150px;width:32.5%"></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://wallpapers.com/images/hd/wolf-of-wall-street-1280-x-800-background-jvta0mk65ixz7q55.jpg" alt="" style="height:150px;width:32.5%"></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/bABCBKYBK7A5G1x0FzoeoNfuj2.jpg" alt="" style="height:150px;width:32.5%"></a>
+            <a href="https://moviestation23.netlify.app/"target="_blank"><img src="https://www.vfx-courses.com/wp-content/uploads/2020/02/h13.jpg" alt="" style="height:150px;width:32.5%"></a>
+            <a href="https://moviestation23.netlify.app/"target="_blank"><img src="https://wallpaper.forfun.com/fetch/be/be3f7aa111c32a314d8015c8c8c5e22b.jpeg" style="height:150px;width:32.5%" alt=""></a>
+            <a href="https://moviestation23.netlify.app/"target="_blank"><img src="https://images.alphacoders.com/111/1119553.jpg" style="height:150px;width:32.5%" alt=""></a>
+            <a href="https://moviestation23.netlify.app/"target="_blank"><img src="https://images7.alphacoders.com/112/1120946.jpg" alt="" style="height:150px;width:32.5%"></a>
+            <a href="https://moviestation23.netlify.app/"target="_blank"><img src="https://wallpapers.com/images/hd/wolf-of-wall-street-1280-x-800-background-jvta0mk65ixz7q55.jpg" alt="" style="height:150px;width:32.5%"></a>
+            <a href="https://moviestation23.netlify.app/"target="_blank"><img src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/bABCBKYBK7A5G1x0FzoeoNfuj2.jpg" alt="" style="height:150px;width:32.5%"></a>
        
         </div>
         <div style="width:82%;margin:0 5%; padding:0;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">

@@ -7,15 +7,12 @@ const movieRoutes=require('./routes/movieRoutes')
 const userRoutes = require('./routes/userRoutes')
 const enquiryRoutes = require('./routes/enquiryRoutes')
 const orderRoutes = require('./routes/orderRoutes')
+const cartRoutes =require('./routes/cartRoutes')
+
 connection()
 
 const cors = require('cors')
 app.use(cors())
-
-// CREATE  a route for home Page
-const User=require('./model/userModel')
-const Movie=require('./model/movieModel')
-const Order=require('./model/orderModel')
 
 //Multer > File/Image Upload
 //we want some data to be sent out >> what method would be used? > POST
@@ -28,6 +25,7 @@ app.use(movieRoutes)
 app.use(userRoutes)
 app.use(enquiryRoutes)
 app.use(orderRoutes)
+app.use(cartRoutes)
 
 //server Start:
 const PORT=8001

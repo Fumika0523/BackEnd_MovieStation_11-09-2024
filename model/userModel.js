@@ -36,6 +36,14 @@ userSchema.virtual('orderRel',{
     localField:"_id",
     foreignField:"owner"
 })
+
+userSchema.virtual('cartRel',{
+    ref:"Cart",
+    localField:"_id",
+    foreignField:"owner"
+}
+)
+
 const User = mongoose.model("User",userSchema)
 
 module.exports=User
