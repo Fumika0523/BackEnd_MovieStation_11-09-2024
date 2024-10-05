@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Order = require('../model/cartModel')
+const Order = require('../model/orderModel')
 const auth = require('../middleware/auth')
 
 // AddOrder
@@ -21,7 +21,7 @@ router.post('/addorder',auth,async(req,res)=>{
 
 // GetOrder
 router.get('/order',auth,async(req,res)=>{
-    try{
+    // try{
     console.log(req.user._id);
     if(req.user){
         const getOrder = await req.user.populate("orderRel")
@@ -34,9 +34,9 @@ router.get('/order',auth,async(req,res)=>{
     }else{
         res.send({message:"User not found, signin failed!"})
     }
-    }catch(e){
-        res.send({message:"Some internal error"})
-    }
+    // }catch(e){
+    //     res.send({message:"Some internal error"})
+    // }
 })
 
 //RemoveOrder
