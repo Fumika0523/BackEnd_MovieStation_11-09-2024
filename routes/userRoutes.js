@@ -2,7 +2,6 @@ const User = require('../model/userModel')
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
-const auth = require('../middleware/auth')
 const sendWelcomeEmail = require('../emails/sendWelcomeEmail')
 
 //POST REQUEST
@@ -76,7 +75,5 @@ try{
     res.status(500).send({message:"Some Internal Error"})
 }
 })
-
-//create a movie with auth
 
 module.exports=router
