@@ -17,8 +17,7 @@ router.post('/contact',auth,async(req,res)=>{
     })
 }catch(e){
     res.status(500).send({message:"Some Internal Error"})
-}
-})
+}})
 
 // Get All Enquiry Data
 router.get('/allenquiry',auth,async(req,res)=>{
