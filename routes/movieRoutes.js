@@ -17,8 +17,8 @@ router.post('/addmovie',auth,async(req,res)=>{
     }
 })
 
-//GET  
-router.get('/movie',auth,async(req,res)=>{
+//GET  with Auth
+router.get('/specificmovie',auth,async(req,res)=>{
     try{
         console.log(req.user._id);
         if(req.user){
@@ -31,11 +31,19 @@ router.get('/movie',auth,async(req,res)=>{
             }
         }else{
             res.send({"message":"User Not Found,Sigin In Failed"})
-        }
-        
-    }
+        }}
 catch(e){
         res.send({"message":"Some Internal Error"})
+    }
+})
+
+router.get('/movie',async(req,res)=>{
+    try{
+        const allMovies = await Movie.find()
+        // inside objective
+        res.send({"movieData":allMovies})
+    }catch(e){
+        res.send({message:"Some Internal Error"})
     }
 })
 
@@ -67,9 +75,7 @@ router.get('/movie/:id',auth,async(req,res)=>{
         res.send(movieById)
     }else{
         res.send({message:"Movie Not Found,Enter the correct ID"})
-    }    
-        }
-    
+    }}
         }else{
             res.send("User Authentication Failed")
         }
