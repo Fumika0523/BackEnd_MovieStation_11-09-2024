@@ -38,14 +38,14 @@ catch(e){
 })
 
 router.get('/movie',async(req,res)=>{
-    try{
+    // try{
         const allMovies = await Movie.find()
         // inside objective
         res.send({"movieData":allMovies})
-    }catch(e){
-        res.send({message:"Some Internal Error"})
-    }
-})
+//     }catch(e){
+//         res.send({message:"Some Internal Error"})
+//     }
+ })
 
 //UPDATE
 router.put('/updatemovie/:id',auth,async(req,res)=>{
