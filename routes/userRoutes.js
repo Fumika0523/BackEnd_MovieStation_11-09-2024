@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const sendWelcomeEmail = require('../emails/sendWelcomeEmail')
+const auth = require('../middleware/auth')
+
 
 //POST REQUEST
 router.post('/signup',async(req,res)=>{
@@ -40,7 +42,7 @@ router.post('/signup',async(req,res)=>{
 })
 
 // Signin
-router.post('/signin',async(req,res)=>{
+router.post('/signin', async(req,res)=>{
 // res.send(req.body)
 try{
     // Checking Email address
