@@ -25,11 +25,11 @@ userSchema.virtual('movieRel',{
     foreignField:"owner"
 })
 
-userSchema.virtual('enquiryRel',{
-    ref:"Enquiry",
-    localField:"_id",
-    foreignField:"owner"
-})
+// userSchema.virtual('enquiryRel',{
+//     ref:"Enquiry",
+//     localField:"_id",
+//     foreignField:"owner"
+// })
 
 userSchema.virtual('orderRel',{
     ref:"Order",
