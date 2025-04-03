@@ -24,7 +24,7 @@ router.get('/specificmovie',auth,async(req,res)=>{
         console.log(req.user._id);
         if(req.user){
             let getMovie=await req.user.populate("movieRel")
-            console.log("test",getMovie) // res
+            console.log("test",getMovie) 
             if(getMovie){
                 res.send({"movieData":req.user.movieRel})
             }else{
