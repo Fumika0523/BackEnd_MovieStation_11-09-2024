@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs')
 const sendWelcomeEmail = require('../emails/sendWelcomeEmail')
 const auth = require('../middleware/auth')
 
-
 //POST REQUEST
 router.post('/signup',async(req,res)=>{
     //try{
@@ -62,7 +61,6 @@ try{
 
       if(isMatch && user){
         const token = await user.generateAuthToken()
-
         return res.status(200).send({
             message:"You have successfully Sign In!",
             user:user,
@@ -76,6 +74,22 @@ try{
 }catch(e){
     res.status(500).send({message:"Some Internal Error"})
 }
+})
+
+// Get Routes
+//userdetail 
+router.get('/user',auth,async(req,res)=>{
+     try{
+     if(req.user){
+        res.send({"userDetail":req.user})
+     }
+     else{
+        res.send({message:"User Not Found"})       
+     }
+    }
+    catch(e){
+        res.send({"Message":"Some Internal Error"})
+    }
 })
 
 module.exports=router
