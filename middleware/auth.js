@@ -23,4 +23,16 @@ try{
 }
 
 }
-module.exports = auth
+
+const conditionalAuth = (req,res,next)=>{
+    if(req.header('Authorization')){
+        // if Authorazation is there,call auth
+        return auth(req,res,next)
+    }else{
+        // if missing pls go to next
+        return next()
+    }
+    
+}
+
+module.exports = {auth, conditionalAuth}

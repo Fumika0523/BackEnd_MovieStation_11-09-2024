@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const sendWelcomeEmail = require('../emails/sendWelcomeEmail')
-const auth = require('../middleware/auth')
+const {auth} = require('../middleware/auth')
 
 //POST REQUEST
 router.post('/signup',async(req,res)=>{
@@ -90,6 +90,23 @@ router.get('/user',auth,async(req,res)=>{
     catch(e){
         res.send({"Message":"Some Internal Error"})
     }
+})
+
+//get single user
+router.get('/profile',auth,async(req,res)=>{
+    try{
+    console.log(req.token)
+    console.log(req.user)
+    const getProfile = await User.findById(req.user._id)
+    if(!getProfile){
+        res.send({
+            message:"The user profile cannot be found!"
+        })
+    }
+    res.send({ProfileData:getProfile})
+    }catch(e){
+    res.send({message:"Some Internal Error"})
+}
 })
 
 module.exports=router

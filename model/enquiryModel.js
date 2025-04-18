@@ -7,11 +7,11 @@ const enquirySchema = new mongoose.Schema({
     phone_number:{type:String,required:true},
     subject:{type:String,required:true},
     description:{type:String,required:true},
-    // owner:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"User",
-    //     required:true // you need the user id
-    // }
+    owner:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:false // you need the user id
+    }
 },{
     timestamps:true
 })

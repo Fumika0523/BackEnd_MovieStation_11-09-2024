@@ -1,7 +1,7 @@
 const express= require('express')
 const router=express.Router()
 const Movie = require('../model/movieModel')
-const auth = require('../middleware/auth')
+const {auth} = require('../middleware/auth')
 
 router.post('/addmovie',auth,async(req,res)=>{
       try{
