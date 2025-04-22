@@ -66,21 +66,15 @@ router.put('/updatemovie/:id',auth,async(req,res)=>{
 router.get('/movie/:id',auth,async(req,res)=>{
      try{
         if(req.user){
-            const getMovie = await req.user.populate("movieRel")
-    if(getMovie){
-        const allMovies=req.user.movieRel
-    let movieById=allMovies.filter((element,index)=>{
-        return element._id==req.params.id
-    })
-    if(movieById.length!=0){
-        res.send(movieById)
-    }else{
-        res.send({message:"Movie Not Found,Enter the correct ID"})
-    }}
-        }else{
-            res.send("User Authentication Failed")
+            const getById = await Movie.findById(req.params.id)
+            if(!getById) {
+              return  res.send({message:"The movie is not found"})
+            }
+            // res.send({message:"getById",getById}) //top of the object and object >> error
+            res.send(getById)
         }
-        }catch(e){
+        }
+        catch(e){
             res.send({"message":"Some Internal Error"})
         }
 })

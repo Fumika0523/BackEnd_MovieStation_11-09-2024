@@ -109,4 +109,21 @@ router.get('/profile',auth,async(req,res)=>{
 }
 })
 
+
+//update profile
+router.put('/profile/:id',auth,async(req,res)=>{
+    // try{
+        console.log("Update Profile",req.user._id)
+        if(req.user){
+            const updateUser = await User.findOneAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
+            if(!updateUser){
+                res.send({message:"User Not Found"})
+            }
+        }res.send("updateUser",updateUser)            
+    // }catch(e){
+    //     res.send({message:"Some Internal Error"})
+    // }
+})
+
+
 module.exports=router
