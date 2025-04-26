@@ -5,21 +5,30 @@ const {auth} = require('../middleware/auth')
 
 // AddCart
 router.post('/addcart',auth,async(req,res)=>{
-    //  try{
+     try{
         const cartData = new Cart({
             ...req.body,
             owner:req.user._id
         })
-        if(!cartData){
-            res.status(401).send({message:"cart cannot be added"})
-        }await cartData.save()
+        if(cartData){
+            await cartData.save()
         res.status(200).send({cartData:cartData,message:"Cart has been added successfully!"})
-    // }catch(e){
-    //     res.status(500).send({message:"Some internal error"})
-    // }
+        console.log(cartData,"Cart has been added successfully!")
+    }else{
+          return  res.send({message:"This movie is already added"})
+        }    
+    }catch(e){
+        // res.status(500).send({message:"Some internal error"})
+        console.log("error",e.code) // e >> entire messages show, e.code >> only error code show, // "e" is object
+        if (e.code==11000){
+           return  res.send({message:"This is a duplicated key"})
+        }else{
+            return res.send({message:"some internal error"})
+        }
+    }
 })
 
-// GetCart
+// GetCart - 
 router.get('/cart',auth,async(req,res)=>{
     try{
     console.log(req.user._id);
@@ -56,5 +65,3 @@ router.delete('/clearcart',auth,async(req,res)=>{
 })
 
 module.exports=router
-
-// Buy now button >> order summry
