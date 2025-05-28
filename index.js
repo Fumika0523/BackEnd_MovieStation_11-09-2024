@@ -39,23 +39,24 @@ app.get("/getinvoice",auth,async(req,res)=>{
     doc.pipe(res)
 //Finalize the PDF
 
-//invoice generated for order ID
-    console.log("1",req.params.orderid)
-    console.log("2",req.body.orderid)
-    console.log("3",req.query.orderid)
-    console.log(req.user._id)
-    console.log("req.user",req.user)
-    const getById = await Movie.findById(req.params._id)
-    console.log(getById)
+    console.log("req.query.orderid",req.query.orderid)
+    console.log("req.user.orderid",req.user._id)
     console.log(req.user.name)
-    console.log(req.movie)
-    console.log(req.order)
-    const order_Date = new Date().toLocaleDateString()
+    console.log("moviename",req.query.moviename)
+    console.log(req.query.orderdate)
+    // inside objective
 
-//order by username, order date
-//how you will pass ? req.params,req.body,req.query
+doc.fontSize(25).text(`Invoice Generated for ${req.user.name}${req.user.lastname}`)
+.moveDown(0.5)
+doc.fontSize(18).text(`Oder ID : ${req.query.orderid}`)
+.moveDown(0.5)
+doc.fontSize(18).text(`Oder Date : ${req.query.orderdate}`)
+.moveDown(0.5)
+doc.fontSize(18).text(`Movies: ${req.query.moviename}`)
+.moveDown(1)
+doc.fontSize(18).text(`Total Price: ${req.query.totalprice}`);
 
-doc.fontSize(35).text(`${req.query.orderid}`)
+
 doc.end()
 })
 app.use(movieRoutes)
