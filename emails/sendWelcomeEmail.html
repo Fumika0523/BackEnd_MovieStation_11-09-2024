@@ -1,7 +1,4 @@
-const nodemailer = require('nodemailer')
-
-const htmlTemplate=(name)=>{
-    return ` <div>
+<div>
         <div style="width:90%;text-align: center; margin:0 2.5%; padding:5% 2.5%;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(to bottom, #3b4c67, #00040c);color:rgba(252, 252, 255, 0.708);text-wrap: none;">
             <!-- Title -->
             <h3 style="padding:0px 26%;text-align:start;color:rgb(247, 207, 4)">🛋️🍷MovieStation</h3>
@@ -40,33 +37,4 @@ const htmlTemplate=(name)=>{
     </div>
     </div>
 
-  `
-}
 
-const transporter = nodemailer.createTransport({
-    service:"gmail",
-    auth:{
-        user:"fumicha.3fan1@gmail.com",
-        pass:"gdys zixk gzxo lbxy"
-    }
-})
-
-let sendWelcomeEmail=(email,name)=>{
-    // console.log(`Hi ${name}, Welcome to MovieStation!`)
-    let html=htmlTemplate(name)
-    const mailOptions={
-        from:"fumicha.3fan1@gmail.com",
-        to:email,
-        subject:"Welcome to MovieStation!",
-        html:html
-    }
-    transporter.sendMail(
-        mailOptions),(error,info)=>{
-            if(error){
-                console.log("error",error)
-            }else{
-                console.log("Email send",info.response)
-            }
-        }}
-
-    module.exports=sendWelcomeEmail

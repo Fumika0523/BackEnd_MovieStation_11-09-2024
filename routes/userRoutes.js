@@ -15,7 +15,7 @@ router.post('/signup',async(req,res)=>{
             {phone_number:req.body.phone_number}
         ]
     })
-    console.log(user)
+    // console.log(user)
     if(user){console.log("User is found", req.body.email)
         return res.send("User Already Exists")
     }
@@ -27,13 +27,13 @@ router.post('/signup',async(req,res)=>{
         password:hashedPassword // this one I need to update
     })
     await userData.save()
-    res.send(userData)
+    res.send({userData,message:"Successfully logged in!"})
+    // console.log({userData,message:"Successfully logged in!"})
     if(userData){
     sendWelcomeEmail(req.body.email,req.body.name)
     }else{
         res.send(
-        {message:"Please check again"}
-        )
+        {message:"Please check again"})
     }
 //     }catch(e){
 //     res.send("Some Internal Error Occurred")
@@ -95,8 +95,8 @@ router.get('/user',auth,async(req,res)=>{
 //get single user
 router.get('/profile',auth,async(req,res)=>{
     try{
-    console.log(req.token)
-    console.log(req.user)
+    // console.log(req.token)
+    // console.log(req.user)
     const getProfile = await User.findById(req.user._id)
     if(!getProfile){
         res.send({

@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken")
 
 const userSchema = new mongoose.Schema({
     name:{type:String,required:true},
-    lastname:{type:String,required:true},
-    // age:{type:Number,required:true},
+    lastname:{type:String,required:false},
+    // age:{type:Number,required:false},
     gender:{type:String,required:true},
     phone_number:{type:String,required:true},
     email:{type:String,required:true},
@@ -40,6 +40,13 @@ userSchema.virtual('orderRel',{
 
 userSchema.virtual('cartRel',{
     ref:"Cart",
+    localField:"_id",
+    foreignField:"owner"
+}
+)
+
+userSchema.virtual('wishRel',{
+    ref:"Wish",
     localField:"_id",
     foreignField:"owner"
 }

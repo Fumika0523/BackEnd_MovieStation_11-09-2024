@@ -4,7 +4,7 @@ const htmlTemplate=(name)=>{
     return `    <div>
         <div style="width:82%;margin:0 5%; padding:4% 4%;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(to bottom, #6c97b5, #011233);color:white">
             <h1 style="color:rgb(247, 207, 4);font-size: 50px">🛋️🍷MovieStation</h1>
-            <h4 style="font-size:200%;margin-bottom: 0px;">Hi, <span style="color:rgb(214, 183, 24)">Fumika</span></h4>
+            <h4 style="font-size:200%;margin-bottom: 0px;">Hi, <span style="color:rgb(214, 183, 24)">${name}</span></h4>
             <h1 style="font-size: 330%;margin-top:20px;">📣The Movie has been deleted</h1>
         
                 <a href="https://moviestation-23.netlify.app/"target="_blank" style="text-decoration: none;"><button

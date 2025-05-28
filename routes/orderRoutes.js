@@ -20,24 +20,24 @@ router.post('/addorder',auth,async(req,res)=>{
 })
 
 // GetOrder
-// router.get('/order',auth,async(req,res)=>{
-//     // try{
-//     console.log("req.user._id",req.user._id);
-//     if(req.user){
-//         const getOrder = await req.user.populate("orderRel")
-//         console.log("test",getOrder)
-//         if(getOrder){
-//             res.send({"orderData":req.user.orderRel})
-//         }else{
-//             res.send({message:"Order not Added"})
-//         }
-//     }else{
-//         res.send({message:"User not found, signin failed!"})
-//     }
-//     // }catch(e){
-//     //     res.send({message:"Some internal error"})
-//     // }
-// })
+router.get('/order',auth,async(req,res)=>{
+    // try{
+    console.log("req.user._id",req.user._id);
+    if(req.user){
+        const getOrder = await req.user.populate("orderRel")
+        console.log("test",getOrder)
+        if(getOrder){
+            res.send({"orderData":req.user.orderRel})
+        }else{
+            res.send({message:"Order not Added"})
+        }
+    }else{
+        res.send({message:"User not found, signin failed!"})
+    }
+    // }catch(e){
+    //     res.send({message:"Some internal error"})
+    // }
+})
 
 //Sort Order
 

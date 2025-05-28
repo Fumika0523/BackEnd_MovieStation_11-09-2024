@@ -1,7 +1,7 @@
-const mongoose=require('mongoose')
+const mongoose = require ('mongoose')
 
-const movieSchema = new mongoose.Schema({
-    movieposter:{type:String,required:true},
+const wishSchema = new mongoose.Schema({
+  movieposter:{type:String,required:true},
     moviename:{type:String,required:true},
     rating:{type:String,required:true},
     summary:{type:String,required:true},
@@ -21,6 +21,7 @@ const movieSchema = new mongoose.Schema({
     timestamps:true
 })
 
-const Movie = mongoose.model("Movie",movieSchema)
+const Wish = mongoose.model("Wish",wishSchema)
+module.exports = Wish
 
-module.exports=Movie
+
