@@ -40,29 +40,39 @@ app.post("/getinvoice",auth,async(req,res)=>{ //posting data from front-end (req
     const {orderid,orderdate,totalprice,movies} =req.body
     // console.log(orderid,orderdate,totalprice,movies)
 
-//     function drawTableRow(doc,y,row,widths){
-//     let x = 50;
-//     row.forEach((cell,i)=>{
-//     doc.text(cell,x,y,{width:widths[i],align:"left"})
-//     x+=widths[i]
-// })
-// }
+    doc.fontSize(23).text(`Invoice Generated for ${req.user.name}`).moveDown(1)
+    doc.fontSize(16).text(`Order ID: ${orderid}`).moveDown(0.5)
+    doc.fontSize(16).text(`Oder Date : ${req.query.orderdate}`).moveDown(1)
 
-// const tableHeaders =["item","price","totalPrice"]
-// const colWidths=[300,100,100,100]
-// drawTableRow(doc,doc.y,tableHeaders,colWidths)
+//Table Title
+doc.fontSize(18).text("Ordered Movies:",{underline:true} ) .moveDown(0.5)
+
+    function drawTableRow(doc,y,row,widths){
+    let x = 50; 
+    row.forEach((cell,i)=>{
+    doc.text(cell,x,y,{width:widths[i],align:"left"})
+
+    x+=widths[i]
+})
+}
+
+const tableHeaders =["item","price"
+    // ,"totalPrice"
+]
+const colWidths=[250,100,100]
+drawTableRow(doc,doc.y,tableHeaders,colWidths)
 
 // const items=[
-    // {moviname:`${req.query.moviename}`,price:`${req.query.price}`,totalPrice:`${req.query.totalprice}`},
-    //  {moviename:`${req.query.moviename}`},   
+//     {moviname:`${req.query.moviename}`,price:`${req.query.price}`,totalPrice:`${req.query.totalprice}`},
+//      {moviename:`${req.query.moviename}`},   
 //     {moviename:`${req.body}`}
 // ]
 
-// items.forEach((element)=>{
-//     const finalPrice = element.qty*element.price
-//     drawTableRow(doc,doc.y,[element.moviename,element.price,finalPrice],colWidths)
-// })
 
+movies.forEach((element)=>{
+    // const finalPrice = element.qty*element.amount
+    drawTableRow(doc,doc.y,[element.moviename,element.amount],colWidths)
+})
     //Finalize the PDF
     // console.log("req.query.orderid",req.query.orderid)
     // console.log("req.user.userid",req.user._id)
@@ -74,36 +84,32 @@ app.post("/getinvoice",auth,async(req,res)=>{ //posting data from front-end (req
 
 // doc.fontSize(25).text(`Invoice Generated for ${req.user.name}`)
 
-doc.fontSize(25).text(`Invoice Generated for ${req.user.ame}`).moveDown(1)
-doc.fontSize(18).text(`Order ID: ${orderid}`).moveDown(0.5)
-doc.fontSize(18).text(`Oder Date : ${req.query.orderdate}`).moveDown(1)
 
-//Table Title
-doc.fontSize(20).text("Ordered Movies:",{underline:true} ) .moveDown(0.5)
+doc.fontSize(16).text(`Total Price: USD ${totalprice}`)
 // doc.fontSize(18).text(`Total Price: ${req.query.totalprice}`);
 
 //Table Header
-const tableTop = doc.y;
-const itemX = 50; //width
-const movieX = 100;//width
-const priceX = 400;//width
+// const tableTop = doc.y;
+// const itemX = 50; //width
+// const movieX = 100;//width
+// const priceX = 400;//width
 
-doc.fontSize(14).text("S.No",itemX,tableTop).text("Movie Name",movieX,tableTop).text("Price(USD)",priceX,tableTop)
+// doc.fontSize(14).text("S.No",itemX,tableTop).text("Movie Name",movieX,tableTop).text("Price(USD)",priceX,tableTop)
 
-//Header Underline
-doc.moveTo(itemX,tableTop + 18).lineTo(550,tableTop + 18).stroke();
+// //Header Underline
+// doc.moveTo(itemX,tableTop + 18).lineTo(550,tableTop + 18).stroke();
 
 //Table Rows >> drawTable
-let positionY = tableTop + 30;
-movies.forEach((movie,index)=>{
-    doc.fontSize(12).text(index + 1, itemX, positionY).text(movie.moviename, movieX, positionY).text(`$${movie.amount}`,priceX,positionY);
-    positionY += 20
-})
+// let positionY = tableTop + 30;
+// movies.forEach((movie,index)=>{
+//     doc.fontSize(12).text(index + 1, itemX, positionY).text(movie.moviename, movieX, positionY).text(`$${movie.amount}`,priceX,positionY);
+//     positionY += 20
+// })
 
-doc.moveTo(itemX,positionY +10).lineTo(550,positionY + 10).stroke()
+// doc.moveTo(itemX,positionY +10).lineTo(550,positionY + 10).stroke()
 
 //Total Price
-doc.fontSize(16).text(`Total Price: USD ${totalprice}`,priceX,positionY + 20, {align:"right"})
+// doc.fontSize(16).text(`Total Price: USD ${totalprice}`,priceX,positionY + 20, {align:"right"})
 
 doc.end()
 })
