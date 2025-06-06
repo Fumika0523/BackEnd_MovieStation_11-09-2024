@@ -123,7 +123,7 @@ app.use(cartRoutes)
 app.use(wishRoutes)
 
 //server Start:
-const PORT =8002
+const PORT =process.env.PORT || 8002
 app.listen(PORT,()=>{
     console.log("Server Started at PORT",PORT)
 })
