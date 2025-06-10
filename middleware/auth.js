@@ -21,15 +21,17 @@ try{
 }catch(e){
     res.send({message:"Authentication Error"})
 }
-
 }
 
 const conditionalAuth = (req,res,next)=>{
     if(req.header('Authorization')){
         // if Authorazation is there,call auth
+        console.log("conditional Auth")
         return auth(req,res,next)
+      
     }else{
         // if missing pls go to next
+        console.log("else part")
         return next()
     }
     

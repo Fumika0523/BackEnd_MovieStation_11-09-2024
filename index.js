@@ -25,40 +25,37 @@ app.use(express.json())
 app.get('/',(req,res)=>{
     res.send("Welcome to MovieStation")
 })
-//auth
 
-app.post("/getinvoice",auth,async(req,res)=>{ //posting data from front-end (req.body), get << to retrieve the data
+//auth
+app.post("/getinvoice",auth,async(req,res)=>{ 
+    //posting data from front-end (req.body), get << to retrieve the data
     //set Header >> Postman/Browser >> Need to download
-    res.setHeader("content-Type","application/pdf")
-    res.setHeader("content-Disposition","attachment ; filename=order-summary.pdf")
-  
+res.setHeader("content-Type","application/pdf")
+res.setHeader("content-Disposition","attachment ; filename=order-summary.pdf")
     // res.json({ message: 'Invoice received!' });
     //create a document
-   const doc = new PDFDocument({margin:50,size:"A4"})
-    doc.pipe(res)
+const doc = new PDFDocument({margin:50,size:"A4"})
+doc.pipe(res)
 
-    const {orderid,orderdate,totalprice,movies} =req.body
-    // console.log(orderid,orderdate,totalprice,movies)
-
-    doc.fontSize(23).text(`Invoice Generated for ${req.user.name}`).moveDown(1)
-    doc.fontSize(16).text(`Order ID: ${orderid}`).moveDown(0.5)
-    doc.fontSize(16).text(`Oder Date : ${req.query.orderdate}`).moveDown(1)
+const {orderid,orderdate,totalprice,movies} =req.body
+// console.log(orderid,orderdate,totalprice,movies)
+doc.fontSize(23).text(`Invoice Generated for ${req.user.name}`).moveDown(1)
+doc.fontSize(16).text(`Order ID: ${orderid}`).moveDown(0.5)
+doc.fontSize(16).text(`Oder Date : ${req.query.orderdate}`).moveDown(1)
 
 //Table Title
 doc.fontSize(18).text("Ordered Movies:",{underline:true} ) .moveDown(0.5)
-
-    function drawTableRow(doc,y,row,widths){
-    let x = 50; 
-    row.forEach((cell,i)=>{
-    doc.text(cell,x,y,{width:widths[i],align:"left"})
-
-    x+=widths[i]
+function drawTableRow(doc,y,row,widths){
+let x = 50; 
+row.forEach((cell,i)=>{
+doc.text(cell,x,y,{width:widths[i],align:"left"})
+x+=widths[i]
 })
 }
 
-const tableHeaders =["item","price"
-    // ,"totalPrice"
+const tableHeaders =["item","price", // ,"totalPrice"
 ]
+
 const colWidths=[250,100,100]
 drawTableRow(doc,doc.y,tableHeaders,colWidths)
 
@@ -67,7 +64,6 @@ drawTableRow(doc,doc.y,tableHeaders,colWidths)
 //      {moviename:`${req.query.moviename}`},   
 //     {moviename:`${req.body}`}
 // ]
-
 
 movies.forEach((element)=>{
     // const finalPrice = element.qty*element.amount
@@ -84,11 +80,10 @@ movies.forEach((element)=>{
 
 // doc.fontSize(25).text(`Invoice Generated for ${req.user.name}`)
 
-
 doc.fontSize(16).text(`Total Price: USD ${totalprice}`)
 // doc.fontSize(18).text(`Total Price: ${req.query.totalprice}`);
 
-//Table Header
+// Table Header
 // const tableTop = doc.y;
 // const itemX = 50; //width
 // const movieX = 100;//width
@@ -96,14 +91,14 @@ doc.fontSize(16).text(`Total Price: USD ${totalprice}`)
 
 // doc.fontSize(14).text("S.No",itemX,tableTop).text("Movie Name",movieX,tableTop).text("Price(USD)",priceX,tableTop)
 
-// //Header Underline
+// Header Underline
 // doc.moveTo(itemX,tableTop + 18).lineTo(550,tableTop + 18).stroke();
 
-//Table Rows >> drawTable
+// Table Rows >> drawTable
 // let positionY = tableTop + 30;
 // movies.forEach((movie,index)=>{
-//     doc.fontSize(12).text(index + 1, itemX, positionY).text(movie.moviename, movieX, positionY).text(`$${movie.amount}`,priceX,positionY);
-//     positionY += 20
+// doc.fontSize(12).text(index + 1, itemX, positionY).text(movie.moviename, movieX, positionY).text(`$${movie.amount}`,priceX,positionY);
+// positionY += 20 
 // })
 
 // doc.moveTo(itemX,positionY +10).lineTo(550,positionY + 10).stroke()
@@ -113,7 +108,6 @@ doc.fontSize(16).text(`Total Price: USD ${totalprice}`)
 
 doc.end()
 })
-
 
 app.use(movieRoutes)
 app.use(userRoutes)
