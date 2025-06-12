@@ -1,7 +1,7 @@
 const express= require('express')
 const router=express.Router()
 const Movie = require('../model/movieModel')
-const {auth} = require('../middleware/auth')
+const {auth, conditionalAuth} = require('../middleware/auth')
 
 router.post('/addmovie',auth,async(req,res)=>{
       try{
@@ -19,11 +19,10 @@ router.post('/addmovie',auth,async(req,res)=>{
 })
 
 //GET  with Auth
-router.get('/specificmovie',auth,async(req,res)=>{
+router.get('/specificmovie',conditionalAuth,async(req,res)=>{
     try{
         // console.log(req.user._id);
         if(req.user){
-            let getMovie=await req.user.populate("movieRel")
             // console.log("test",getMovie) 
             if(getMovie){
                 res.send({"movieData":req.user.movieRel})
@@ -39,13 +38,13 @@ catch(e){
 })
 
 router.get('/movie',async(req,res)=>{
-    // try{
+    try{
         const allMovies = await Movie.find()
         // inside objective
         res.send({"movieData":allMovies})
-//     }catch(e){
-//         res.send({message:"Some Internal Error"})
-//     }
+    }catch(e){
+        res.send({message:"Some Internal Error"})
+    }
  })
 
 //UPDATE
@@ -63,9 +62,9 @@ router.put('/updatemovie/:id',auth,async(req,res)=>{
 })
 
 //Edit >> GET Movie
-router.get('/movie/:id',auth,async(req,res)=>{
+router.get('/movie/:id',async(req,res)=>{
      try{
-        if(req.user){
+        // if(req.user){
             const getById = await Movie.findById(req.params.id)
             if(!getById) {
               return  res.send({message:"The movie is not found"})
@@ -73,7 +72,7 @@ router.get('/movie/:id',auth,async(req,res)=>{
             // res.send({message:"getById",getById}) //top of the object and object >> error
             res.send(getById)
         }
-        }
+        // }
         catch(e){
             res.send({"message":"Some Internal Error"})
         }
