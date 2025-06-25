@@ -19,23 +19,29 @@ router.post('/addmovie',auth,async(req,res)=>{
 })
 
 //GET  with Auth
-router.get('/specificmovie',conditionalAuth,async(req,res)=>{
-    try{
+router.get('/specificmovie',auth,async(req,res)=>{
+    // try{
+
         // console.log(req.user._id);
-        if(req.user){
-            // console.log("test",getMovie) 
-            if(getMovie){
-                res.send({"movieData":req.user.movieRel})
-            }else{
-                res.send({"message":"Movie not added"})
-            }
-        }else{
-            res.send({"message":"User Not Found,Sigin In Failed"})
-        }}
-catch(e){
-        res.send({"message":"Some Internal Error"})
-    }
-})
+        // if(req.user){
+        //     // console.log("test",getMovie) 
+        //     if(getMovie){
+            
+       await req.user.populate("movieRel");
+        const getMovie = req.user.movieRel;
+        console.log(getMovie);
+        // console.log(req.user._id)
+        //     }else{
+        //         res.send({"message":"Movie not added"})
+        //     }
+        // }else{
+        //     res.send({"message":"User Not Found,Sigin In Failed"})
+        // }}
+// catch(e){
+//         res.send({"message":"Some Internal Error"})
+//     }
+}
+)
 
 router.get('/movie',async(req,res)=>{
     try{

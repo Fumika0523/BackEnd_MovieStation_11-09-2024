@@ -5,7 +5,9 @@ const orderSchema = new mongoose.Schema({
         {
             moviename:{type:String},
             movieposter:{type:String},
-            amount:{type:Number,default:250}
+            amount:{type:Number,required:true},
+            trailer:{type:String,required:true},
+            trailer:{type:String,required:true},
         }
     ],
 owner:{
