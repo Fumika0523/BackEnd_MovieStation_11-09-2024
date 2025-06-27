@@ -4,7 +4,7 @@ const Movie = require('../model/movieModel')
 const {auth, conditionalAuth} = require('../middleware/auth')
 
 router.post('/addmovie',auth,async(req,res)=>{
-      try{
+    //   try{
         const movieData = new Movie({
             ...req.body, //making the copy of req.body
             owner:req.user._id // this one I need to update
@@ -13,10 +13,10 @@ router.post('/addmovie',auth,async(req,res)=>{
         if(!movieData){res.status(401).send({message:"Movie cannot be added"})}
         await movieData.save()
         res.status(200).send({movieData:movieData,message:"Movie has been added successfully"})
-         }catch(e){
-        res.status(500).send({message:"Some internal Error"})
-    }
-})
+//          }catch(e){
+//         res.status(500).send({message:"Some internal Error"})
+//}
+ })
 
 //GET  with Auth
 router.get('/specificmovie',auth,async(req,res)=>{

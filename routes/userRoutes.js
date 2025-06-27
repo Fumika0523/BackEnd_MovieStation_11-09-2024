@@ -7,7 +7,7 @@ const {auth} = require('../middleware/auth')
 
 //POST REQUEST
 router.post('/signup',async(req,res)=>{
-    //try{
+    try{
     //checking if the user is already registered
     let user = await User.findOne({
               $or:[
@@ -35,9 +35,9 @@ router.post('/signup',async(req,res)=>{
         res.send(
         {message:"Please check again"})
     }
-//     }catch(e){
-//     res.send("Some Internal Error Occurred")
-// }
+    }catch(e){
+    res.send("Some Internal Error Occurred")
+}
 })
 
 // Signin

@@ -12,7 +12,7 @@ const movieSchema = new mongoose.Schema({
     disLikeNum:{type:String,required:true},
     genres:{type:String,required:false},
     category:{type:String,required:true},
-    amount:{type:String,required:true},
+    amount:{type:String,required:true,default:"250"},
     owner:{ //user ID
         type:mongoose.Schema.Types.ObjectId,
         ref:"User", 

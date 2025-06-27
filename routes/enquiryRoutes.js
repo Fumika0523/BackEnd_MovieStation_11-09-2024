@@ -6,10 +6,10 @@ const {auth,conditionalAuth} = require('../middleware/auth')
 
 // Submit Enquiry
 router.post('/contact',conditionalAuth,async(req,res)=>{
-    // try{
+    try{
      // Check if user exists/is registered
-     const isRegistered = req?.user?._id ? true : false;
-    //  console.log(req.user._id)
+     const isRegistered = req?.user?.id ? true : false;
+    // console.log(req.user._id)
      // Create enquiry object with conditional owner field using ternary
      const enquiryDetail = new Enquiry
          (
@@ -24,9 +24,9 @@ router.post('/contact',conditionalAuth,async(req,res)=>{
     res.status(200).send({
         enquiryDetail:enquiryDetail,message:"Your inquery has successfully been sent!"
     })
-// }catch(e){
-//     res.status(500).send({message:"Some Internal Error"})
-// }
+}catch(e){
+    res.status(500).send({message:"Some Internal Error"})
+}
 })
 
 // Get All Enquiry Data
