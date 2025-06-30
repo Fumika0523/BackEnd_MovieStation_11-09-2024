@@ -1,28 +1,54 @@
 const nodemailer = require('nodemailer')
 
 const htmlTemplate=(name)=>{
-    return `    <div>
-        <div style="width:82%;margin:0 5%; padding:4% 4%;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(to bottom, #6c97b5, #011233);color:white">
-            <h1 style="color:rgb(247, 207, 4);font-size: 50px">🛋️🍷MovieStation</h1>
-            <h4 style="font-size:200%;margin-bottom: 0px;">Hi, <span style="color:rgb(214, 183, 24)">Fumika</span></h4>
-            <h1 style="font-size: 330%;margin-top:20px;">📣The movie has been updated!</h1>
+    return `   
+      <div style="">
+        <div style="border-radius:10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #020024; background: linear-gradient(180deg,rgb(11, 11, 15) 0%, rgb(16, 9, 48) 35%, rgb(2, 77, 92) 100%);color:rgb(15, 1, 34);padding: 10px">
+            <!-- title -->
+            <h2 style="color:rgb(247, 207, 4); margin:0% auto;text-align: center;">🛋️🍷MovieStation</h2>
+
+            <h4 style="font-size:18px;color:aliceblue;">Hi, <span style="color:rgb(214, 183, 24)">${name}</span></h4>
+            <h1 style="font-size: 18px;margin-top:20px;color:aliceblue">📣The movie has been updated!</h1>
                 
-                <a href="https://moviestation-23.netlify.app/"target="_blank" style="text-decoration: none;"><button
-                style="background-color:rgb(245, 208, 23);height: 75%;width:50%;font-size: 200%;color:white;font-weight: bold;display: block;margin: auto;text-wrap: nowrap;border-radius: 10px;color: black;text-wrap: wrap;text-align: center; padding:1.5% 0;">Go to Explore the movies✔️</button></a>
+                <a href="https://moviestation-23.netlify.app/"target="_blank" style="text-decoration: none;">
+                <button
+                style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color:rgb(245, 208, 23);font-size:18px;font-weight: 700; display: flex; align-items:center;justify-content:center; text-wrap: nowrap;border-radius: 10px; color: black;text-wrap: wrap;text-align: center; padding:5px 10px 8px 10px;width: 100%;">Go to Explore the movies✔️</button>
+            </a>
     
-            <p style="font-size: 165%;text-align: center;">Enjoy the movie!🍿📽️</p>
-         
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://www.vfx-courses.com/wp-content/uploads/2020/02/h13.jpg" alt="" style="height:150px;width:32.5%"></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://wallpaper.forfun.com/fetch/be/be3f7aa111c32a314d8015c8c8c5e22b.jpeg" style="height:150px;width:32.5%" alt=""></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://images.alphacoders.com/111/1119553.jpg" style="height:150px;width:32.5%" alt=""></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://images7.alphacoders.com/112/1120946.jpg" alt="" style="height:150px;width:32.5%"></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://wallpapers.com/images/hd/wolf-of-wall-street-1280-x-800-background-jvta0mk65ixz7q55.jpg" alt="" style="height:150px;width:32.5%"></a>
-            <a href="https://moviestation-23.netlify.app/"target="_blank"><img src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/bABCBKYBK7A5G1x0FzoeoNfuj2.jpg" alt="" style="height:150px;width:32.5%"></a>
-       
-        </div>
-        <div style="width:82%;margin:0 5%; padding:0;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-        <p style="font-size: 155%;color:black">Regards,</p>
-        <p style="font-size: 155%;color:black">MovieStation</p>
+            <p style="font-size: 20px; color: aliceblue;">Enjoy the movie!🍿📽️</p>
+            <!-- 1st photo -->
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+            <a href="https://moviestation-23.netlify.app/" target="_blank" style="flex: 0 0 48%;">
+            <img src="https://www.vfx-courses.com/wp-content/uploads/2020/02/h13.jpg" alt="" style="width: 100%; height: auto;">
+             </a>
+             <!-- 2nd photo -->
+            <!-- Second image -->
+  <a href="https://moviestation-23.netlify.app/" target="_blank" style="flex: 0 0 48%;">
+    <img src="https://wallpaper.forfun.com/fetch/be/be3f7aa111c32a314d8015c8c8c5e22b.jpeg" alt="" style="width: 100%; height: auto;">
+  </a>
+
+  <!-- Third image -->
+  <a href="https://moviestation-23.netlify.app/" target="_blank" style="flex: 0 0 48%;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm2Tmv1y7OLgr492Nz0pLOw1soi4JGUKBR5Q&s" alt="" style="width: 100%; height: 150px; object-fit: cover;">
+  </a>
+
+  <!-- Fourth image -->
+  <a href="https://moviestation-23.netlify.app/" target="_blank" style="flex: 0 0 48%;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4335gXpFuAQ7709vg9DMlsIP7FYM4f0ZXIQ&s" alt="" style="width: 100%; height: 150px; object-fit: cover;">
+  </a>
+
+  <!-- Fifth image -->
+  <a href="https://moviestation-23.netlify.app/" target="_blank" style="flex: 0 0 48%;">
+    <img src="https://wallpapers.com/images/hd/wolf-of-wall-street-1280-x-800-background-jvta0mk65ixz7q55.jpg" alt="" style="width: 100%; height: 150px; object-fit: cover;">
+  </a>
+
+  <!-- Sixth image -->
+  <a href="https://moviestation-23.netlify.app/" target="_blank" style="flex: 0 0 48%;">
+    <img src="https://wallpapercave.com/wp/wp11936971.jpg" alt="" style="width: 100%; height: 150px; object-fit: cover;">
+  </a>
+            </div>
+        <p style="font-size: 18px;color:rgb(196, 192, 192)">Regards,</p>
+        <p style="font-size: 18px;color:rgb(212, 206, 206)">MovieStation</p>
         </div>
     </div>
   `
@@ -42,7 +68,7 @@ let sendUpdateEmail=(email,name)=>{
     const mailOptions={
         from:"fumicha.3fan1@gmail.com",
         to:email,
-        subject:"Welcome to MovieStation!",
+        subject:"Movie is Updated!",
         html:html
     }
     transporter.sendMail(

@@ -2,9 +2,10 @@ const express= require('express')
 const router=express.Router()
 const Movie = require('../model/movieModel')
 const {auth, conditionalAuth} = require('../middleware/auth')
+const sendUpdateEmail = require('../emails/sendUpdateEmail')
 
 router.post('/addmovie',auth,async(req,res)=>{
-    //   try{
+      try{
         const movieData = new Movie({
             ...req.body, //making the copy of req.body
             owner:req.user._id // this one I need to update
@@ -13,35 +14,32 @@ router.post('/addmovie',auth,async(req,res)=>{
         if(!movieData){res.status(401).send({message:"Movie cannot be added"})}
         await movieData.save()
         res.status(200).send({movieData:movieData,message:"Movie has been added successfully"})
-//          }catch(e){
-//         res.status(500).send({message:"Some internal Error"})
-//}
+        sendUodateEmail(req.body.email,req.body.name)
+         }catch(e){
+        res.status(500).send({message:"Some internal Error"})
+}
  })
 
 //GET  with Auth
 router.get('/specificmovie',auth,async(req,res)=>{
-    // try{
-
-        // console.log(req.user._id);
-        // if(req.user){
-        //     // console.log("test",getMovie) 
-        //     if(getMovie){
-            
-       await req.user.populate("movieRel");
-        const getMovie = req.user.movieRel;
-        console.log(getMovie);
-        // console.log(req.user._id)
-        //     }else{
-        //         res.send({"message":"Movie not added"})
-        //     }
-        // }else{
-        //     res.send({"message":"User Not Found,Sigin In Failed"})
-        // }}
-// catch(e){
-//         res.send({"message":"Some Internal Error"})
-//     }
-}
-)
+    try{
+        console.log(req.user._id);
+        if(req.user){
+        let getAddedMovie =  await req.user.populate("movieRel");
+        console.log("getAddedMovie",getAddedMovie);
+        if(getAddedMovie){
+            res.send({"getAddedMovie":req.user.movieRel})
+       }else{
+            res.send({"message":"Movie not added"})
+         }
+        }else{
+            res.send({"message":"User Not Found,Sigin In Failed"})
+        }
+    }
+catch(e){
+        res.send({"message":"Some Internal Error"})
+    }
+})
 
 router.get('/movie',async(req,res)=>{
     try{
@@ -56,15 +54,15 @@ router.get('/movie',async(req,res)=>{
 //UPDATE
 router.put('/updatemovie/:id',auth,async(req,res)=>{
     const updateMovie = await Movie.findOneAndUpdate({_id:req.params.id,owner:req.user._id},req.body,{new:true, runValidators:true})
-    try{
+    // try{
         console.log(updateMovie)
         if(!updateMovie){
         return res.send({message:"Can't update the Movie, please check again"})
          }
          res.send({message:"The Movie has been successfully updated",updateMovie})
-    }catch(e){
-        res.send({message:"Some Internal Error Occur"})
-    }
+    // }catch(e){
+    //     res.send({message:"Some Internal Error Occur"})
+    // }
 })
 
 //Edit >> GET Movie

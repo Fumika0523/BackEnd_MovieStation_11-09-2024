@@ -5,29 +5,29 @@ const {auth,conditionalAuth} = require('../middleware/auth')
 
 
 // Submit Enquiry
-router.post('/contact',conditionalAuth,async(req,res)=>{
-    try{
-     // Check if user exists/is registered
-     const isRegistered = req?.user?.id ? true : false;
-    // console.log(req.user._id)
-     // Create enquiry object with conditional owner field using ternary
-     const enquiryDetail = new Enquiry
-         (
-           isRegistered ?
-            { owner: req.user._id,
-            ...req.body,
-           } : {...req.body}
-        )
-     
-    if(!enquiryDetail){res.status(401).send({message:"Unable to make a inquery."})}
-    await enquiryDetail.save()
+router.post('/contact', conditionalAuth, async (req, res) => {
+  try {
+    const isRegistered = req?.user?._id ? true : false;
+
+    const enquiryData = {
+      ...req.body,
+      ...(isRegistered && { owner: req.user._id })
+    };
+
+    const enquiryDetail = new Enquiry(enquiryData);
+    const savedEnquiry = await enquiryDetail.save();
+
     res.status(200).send({
-        enquiryDetail:enquiryDetail,message:"Your inquery has successfully been sent!"
-    })
-}catch(e){
-    res.status(500).send({message:"Some Internal Error"})
-}
-})
+      enquiryDetail: savedEnquiry,
+      message: "Your enquiry has successfully been sent!"
+    });
+  } catch (e) {
+    console.error("Error while saving enquiry:", e);
+    res.status(500).send({ message: "Some internal error occurred." });
+  }
+});
+
+
 
 // Get All Enquiry Data
         router.get('/allenquiry',async(req,res)=>{
@@ -53,24 +53,24 @@ router.post('/contact',conditionalAuth,async(req,res)=>{
         })
 
     //Get specific Enquiry Data
-    router.get('/specificenquiry',conditionalAuth,async(req,res)=>{
-        try{
-        console.log(req.user._id)
+    router.get('/specific-enquiry',auth,async(req,res)=>{
+        // try{
+        console.log("specific Enquiry",req.user._id)
         if(req.user){
-            let getEnquiry=await req.user.populate("enquiryRel")
-            console.log("test",getEnquiry) 
-            if(getEnquiry){
+          let getAddedEnquiry = await req.user.populate("enquiryRel")
+          console.log("specificEnquiryData",getAddedEnquiry) 
+          if(getAddedEnquiry){
                 res.send({"getEnquiry":req.user.enquiryRel})
-            }else{
-                res.send({"message":"Enquiry not added"})
-            }
+          }else{
+              return  res.send({"message":"Enquiry not added"})
+          }
         }else{
             res.send({"message":"User Not Found,Sigin In Failed"})
         }
-        }
-        catch(e){
-        res.send({"message":"Some Internal Error"})
-        }
+        //}
+        // catch(e){
+        // res.send({"message":"Some Internal Error"})
+        // }
     })
 
     //update

@@ -2,19 +2,21 @@ const nodemailer = require('nodemailer')
 
 const htmlTemplate=(name)=>{
     return ` <div>
-        <div style="width:90%;text-align: center; margin:0 2.5%; padding:5% 2.5%;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(to bottom, #3b4c67, #00040c);color:rgba(252, 252, 255, 0.708);text-wrap: none;">
+         <div style="width:90%;text-align: center; margin:0 2.5%; padding:5% 2.5%;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(to bottom, #3b4c67, #00040c);color:rgba(252, 252, 255, 0.708);text-wrap: none;">
             <!-- Title -->
             <h3 style="padding:0px 26%;text-align:start;color:rgb(247, 207, 4)">🛋️🍷MovieStation</h3>
             <!-- Name -->
-            <h5 style="margin: 5% 0px; text-align: start;padding:0px 28%">Hi, <span style="color:rgb(214, 183, 24)">Fumika</span>!</h5>
+            <h5 style="margin: 5% 0px; text-align: start;padding:0px 28%">Hi, <span style="color:rgb(247, 207, 4)">${name}</span>!</h5>
             <h1 style="color:white">Welcome to MovieStation!</h1>
-                <p style="font-size: 15px;">Thank you for joining MovieStation!</p>
+                <!-- <p style="font-size: 15px;">Thank you for joining MovieStation!</p> -->
                 <p style="font-size: 15px;">Your signup is completed and you are ready to start enjoing movies!</p>
                 
-                <a href="https://moviestation23.netlify.app/"target="_blank" style="text-decoration: none;"><button
-                style="background-color:rgb(245, 208, 23);font-size: 17px;color:white;font-weight: bold;display: block;margin: auto;text-wrap: nowrap;border-radius: 10px;color: black;text-wrap: nowrap;text-align: center; padding:1.5%;margin:3% auto">Go to Explore MovieStation✔️</button></a>
+                <a href="https://moviestation23.netlify.app/"target="_blank" style="text-decoration: none;">
+                <button
+                style="background-color:rgb(245, 208, 23);font-size: 16px;color:white;font-weight: bold;border-radius: 10px;color: black;text-wrap:nowrap;text-align: center; padding:1.5% 2% 2% 2%; margin:3% auto; display:flex; align-items:center;">Go to Explore MovieStation✔️</button>
+            </a>
     
-            <p style="font-size: 165%;text-align: center;">Enjoy the movie!🍿📽️</p>
+            <p style="font-size: 20px; text-align: center;color:aliceblue">Enjoy the movie!🍿📽️</p>
          
             <div>
             <div>
