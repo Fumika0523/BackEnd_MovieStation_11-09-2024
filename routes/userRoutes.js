@@ -52,11 +52,9 @@ try{
     console.log(user)
     // console.log(req.body.password)
      if(!user){return res.status(400).send({message:"User Email Address Not Found"})}
-    
-     // Checking by user with Password
+    // Checking by user with Password
    const isMatch = await bcrypt.compare(req.body.password,user.password)//from postman, from the email
     if(!isMatch){return res.status(400).send({message:"User Password is incorrect"})}
-
     //if user and match both  validation are suvccessful then generate the token
 
       if(isMatch && user){

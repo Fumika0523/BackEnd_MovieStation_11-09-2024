@@ -69,6 +69,13 @@ movies.forEach((element)=>{
     // const finalPrice = element.qty*element.amount
     drawTableRow(doc,doc.y,[element.moviename,element.amount],colWidths)
 })
+
+ doc
+        .moveTo(50, doc.y + 10)
+        .lineTo(550, doc.y + 10)
+        .stroke();
+
+    doc.moveDown(1);
     //Finalize the PDF
     // console.log("req.query.orderid",req.query.orderid)
     // console.log("req.user.userid",req.user._id)

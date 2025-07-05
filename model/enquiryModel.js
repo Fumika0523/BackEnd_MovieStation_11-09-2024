@@ -10,7 +10,8 @@ const enquirySchema = new mongoose.Schema({
     owner:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        required:false // you need the user id
+        required:false, // you need the user id
+     
     }
 },{
     timestamps:true

@@ -14,7 +14,7 @@ router.post('/addmovie',auth,async(req,res)=>{
         if(!movieData){res.status(401).send({message:"Movie cannot be added"})}
         await movieData.save()
         res.status(200).send({movieData:movieData,message:"Movie has been added successfully"})
-        sendUodateEmail(req.body.email,req.body.name)
+       // sendUpdateEmail(req.body.email,req.body.name)
          }catch(e){
         res.status(500).send({message:"Some internal Error"})
 }
@@ -22,7 +22,7 @@ router.post('/addmovie',auth,async(req,res)=>{
 
 //GET  with Auth
 router.get('/specificmovie',auth,async(req,res)=>{
-    try{
+    // try{
         console.log(req.user._id);
         if(req.user){
         let getAddedMovie =  await req.user.populate("movieRel");
@@ -35,10 +35,10 @@ router.get('/specificmovie',auth,async(req,res)=>{
         }else{
             res.send({"message":"User Not Found,Sigin In Failed"})
         }
-    }
-catch(e){
-        res.send({"message":"Some Internal Error"})
-    }
+//     }
+// catch(e){
+//         res.send({"message":"Some Internal Error"})
+//     }
 })
 
 router.get('/movie',async(req,res)=>{
@@ -54,15 +54,15 @@ router.get('/movie',async(req,res)=>{
 //UPDATE
 router.put('/updatemovie/:id',auth,async(req,res)=>{
     const updateMovie = await Movie.findOneAndUpdate({_id:req.params.id,owner:req.user._id},req.body,{new:true, runValidators:true})
-    // try{
+    try{
         console.log(updateMovie)
         if(!updateMovie){
         return res.send({message:"Can't update the Movie, please check again"})
          }
          res.send({message:"The Movie has been successfully updated",updateMovie})
-    // }catch(e){
-    //     res.send({message:"Some Internal Error Occur"})
-    // }
+    }catch(e){
+        res.send({message:"Some Internal Error Occur"})
+    }
 })
 
 //Edit >> GET Movie
@@ -84,7 +84,7 @@ router.get('/movie/:id',async(req,res)=>{
 
 //DELETE
 router.delete('/deletemovie/:id',auth,async(req,res)=>{
-    // try{
+    try{
         console.log("Delete Movie by ID",req.params.id)
         const deleteMovie = await Movie.findOneAndDelete({
             _id:req.params.id,owner:req.user._id
@@ -93,9 +93,9 @@ router.delete('/deletemovie/:id',auth,async(req,res)=>{
             res.send({message:"Movie Not Found"})
         }
         res.send({message:"Movie has been deleted successfully",deleteMovie})
-        // }catch(e){
-        //     res.send({message:"Some Internal Error"})
-        // }
+        }catch(e){
+            res.send({message:"Some Internal Error"})
+        }
 })
 
 

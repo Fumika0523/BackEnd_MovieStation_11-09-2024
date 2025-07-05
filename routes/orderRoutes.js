@@ -41,7 +41,7 @@ router.get('/order',auth,async(req,res)=>{
 
 //Sort Order
 
-router.get('/order',auth,async(req,res)=>{
+router.get('/sorted-order',auth,async(req,res)=>{
     console.log("req.query.sortBy", req.query.sortBy) //asc
     console.log("req.user._id",req.user._id);
 
