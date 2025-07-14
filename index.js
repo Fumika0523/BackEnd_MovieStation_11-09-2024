@@ -39,7 +39,7 @@ doc.pipe(res)
 
 const {orderid,orderdate,totalprice,movies} =req.body
 // console.log(orderid,orderdate,totalprice,movies)
-doc.fontSize(23).text(`Invoice Generated for ${req.user.name}`).moveDown(1)
+doc.fontSize(21).text(`Invoice Generated for ${req.user.name}`).moveDown(1)
 doc.fontSize(16).text(`Order ID: ${orderid}`).moveDown(0.5)
 doc.fontSize(16).text(`Oder Date : ${req.query.orderdate}`).moveDown(1)
 
@@ -53,12 +53,23 @@ x+=widths[i]
 })
 }
 
-const tableHeaders =["item","price", // ,"totalPrice"
-]
+const tableHeaders = ["Movie Name", "Price" /*, "totalPrice" */];
+const colWidths = [350, 100];
 
-const colWidths=[250,100,100]
-drawTableRow(doc,doc.y,tableHeaders,colWidths)
+// Set smaller font size for table headers
+doc.fontSize(15.5); // You can adjust this number to your preferred smaller size
+drawTableRow(doc, doc.y, tableHeaders, colWidths);
 
+// Reset font size back to normal for the rest of the document
+doc.fontSize(16);
+
+// const tableHeaders =["Movie Name","Price", // ,"totalPrice"
+// ]
+
+// const colWidths=[350,100]
+// drawTableRow(doc,doc.y,tableHeaders,colWidths)
+// doc.fontSize(16)
+// do
 // const items=[
 //     {moviname:`${req.query.moviename}`,price:`${req.query.price}`,totalPrice:`${req.query.totalprice}`},
 //      {moviename:`${req.query.moviename}`},   
@@ -70,12 +81,14 @@ movies.forEach((element)=>{
     drawTableRow(doc,doc.y,[element.moviename,element.amount],colWidths)
 })
 
- doc
+ doc    
+        .fontSize(5)
         .moveTo(50, doc.y + 10)
         .lineTo(550, doc.y + 10)
-        .stroke();
+        .stroke()
+      
 
-    doc.moveDown(1);
+    doc.moveDown(3);
     //Finalize the PDF
     // console.log("req.query.orderid",req.query.orderid)
     // console.log("req.user.userid",req.user._id)
@@ -87,7 +100,7 @@ movies.forEach((element)=>{
 
 // doc.fontSize(25).text(`Invoice Generated for ${req.user.name}`)
 
-doc.fontSize(16).text(`Total Price: USD ${totalprice}`)
+doc.fontSize(16).text(`Total Price: $ ${totalprice}`)
 // doc.fontSize(18).text(`Total Price: ${req.query.totalprice}`);
 
 // Table Header

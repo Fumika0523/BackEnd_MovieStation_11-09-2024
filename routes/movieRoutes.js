@@ -53,16 +53,19 @@ router.get('/movie',async(req,res)=>{
 
 //UPDATE
 router.put('/updatemovie/:id',auth,async(req,res)=>{
-    const updateMovie = await Movie.findOneAndUpdate({_id:req.params.id,owner:req.user._id},req.body,{new:true, runValidators:true})
-    try{
-        console.log(updateMovie)
+    console.log("from Backend",req.params.id, req.user._id,req.body)
+    const updateMovie = await Movie.findOneAndUpdate(
+        {_id:req.params.id,owner:req.user._id},
+        req.body,{new:true, runValidators:true})
+    // try{
+        console.log(updateMovie,"updatemovie")
         if(!updateMovie){
         return res.send({message:"Can't update the Movie, please check again"})
          }
          res.send({message:"The Movie has been successfully updated",updateMovie})
-    }catch(e){
-        res.send({message:"Some Internal Error Occur"})
-    }
+    // }catch(e){
+    //     res.send({message:"Some Internal Error Occur"})
+    // }
 })
 
 //Edit >> GET Movie
