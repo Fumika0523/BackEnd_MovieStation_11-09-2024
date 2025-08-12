@@ -6,7 +6,7 @@ const {conditionalAuth} = require('../middleware/auth')
 
 // AddCart
 router.post('/addcart',auth,async(req,res)=>{
-     try{
+    //  try{
         const cartData = new Cart({
             ...req.body,
             owner:req.user._id
@@ -18,7 +18,7 @@ router.post('/addcart',auth,async(req,res)=>{
     }else{
           return  res.send({message:"This movie is already added"})
         }    
-    }catch(e){
+    // }catch(e){
         // res.status(500).send({message:"Some internal error"})
         console.log("error",e.code) // e >> entire messages show, e.code >> only error code show, // "e" is object
         if (e.code==11000){
@@ -27,7 +27,8 @@ router.post('/addcart',auth,async(req,res)=>{
             return res.send({message:"some internal error"})
         }
     }
-})
+// }
+)
 
 // GetCart - 
 router.get('/cart',conditionalAuth,async(req,res)=>{

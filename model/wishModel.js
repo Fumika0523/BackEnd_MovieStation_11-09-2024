@@ -4,6 +4,7 @@ const wishSchema = new mongoose.Schema({
     movieposter:{type:String,required:true},
     moviename:{type:String,required:true},
     rating:{type:String,required:true},
+    amount:{type:Number,required:true},
     // summary:{type:String,required:true},
     // cast:{type:String,required:true},
     trailer:{type:String,required:true},
