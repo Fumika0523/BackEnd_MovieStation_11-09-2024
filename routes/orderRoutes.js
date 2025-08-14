@@ -22,10 +22,10 @@ router.post('/addorder',auth,async(req,res)=>{
 // GetOrder
 router.get('/order',auth,async(req,res)=>{
     // try{
-    console.log("req.user._id",req.user._id);
+   // console.log("req.user._id",req.user._id);
     if(req.user){
         const getOrder = await req.user.populate("orderRel")
-        console.log("test",getOrder)
+        //console.log("test",getOrder)
         if(getOrder){
             res.send({"orderData":req.user.orderRel})
         }else{
@@ -42,17 +42,17 @@ router.get('/order',auth,async(req,res)=>{
 //Sort Order
 
 router.get('/sorted-order',auth,async(req,res)=>{
-    console.log("req.query.sortBy", req.query.sortBy) //asc
-    console.log("req.user._id",req.user._id);
+   // console.log("req.query.sortBy", req.query.sortBy) //asc
+    //console.log("req.user._id",req.user._id);
 
     const sort = {}
     const match = {}
-    console.log(req.query.sortBy)
+  //  console.log(req.query.sortBy)
     if(req.query.sortBy){
         const parts=req.query.sortBy.split(":" )
-           console.log("parts",parts)
+     //      console.log("parts",parts)
            sort[parts[0]]=(parts[1]=="asc"?1:-1)
-           console.log("sort",sort)
+      //     console.log("sort",sort)
     }
 
         const getSortedOrder = await req.user.populate({path:"orderRel",

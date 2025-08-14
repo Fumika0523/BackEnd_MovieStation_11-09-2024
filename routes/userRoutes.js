@@ -16,7 +16,8 @@ router.post('/signup',async(req,res)=>{
         ]
     })
     // console.log(user)
-    if(user){console.log("User is found", req.body.email)
+    if(user){
+      //console.log("User is found", req.body.email)
         return res.send("User Already Exists")
     }
     //password hashing
@@ -49,7 +50,7 @@ try{
         //checking by user detail with email
         email:req.body.email,
     })
-    console.log(user)
+    //console.log(user)
     // console.log(req.body.password)
      if(!user){return res.status(400).send({message:"User Email Address Not Found"})}
     // Checking by user with Password

@@ -95,7 +95,7 @@ movies.forEach((element)=>{
     // console.log("firtname",req.user.name)
     // console.log("moviename",req.query.moviename)
     // console.log(req.query.orderdate)
-    console.log(req.body)
+    // console.log(req.body)
     // inside objective
 
 // doc.fontSize(25).text(`Invoice Generated for ${req.user.name}`)
@@ -139,5 +139,5 @@ app.use(wishRoutes)
 //server Start:
 const PORT =process.env.PORT || 8002
 app.listen(PORT,()=>{
-    console.log("Server Started at PORT",PORT)
+    //console.log("Server Started at PORT",PORT)
 })

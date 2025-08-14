@@ -65,9 +65,9 @@ let sendWelcomeEmail=(email,name)=>{
     transporter.sendMail(
         mailOptions),(error,info)=>{
             if(error){
-                console.log("error",error)
+                // console.log("error",error)
             }else{
-                console.log("Email send",info.response)
+                // console.log("Email send",info.response)
             }
         }}
 

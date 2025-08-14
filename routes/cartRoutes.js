@@ -36,7 +36,7 @@ router.get('/cart',conditionalAuth,async(req,res)=>{
     // console.log(req.user._id);
     if(req.user){
         const getCart = await req.user.populate("cartRel")
-        console.log("test",getCart)
+        //console.log("test",getCart)
         if(getCart){
             res.send({"cartData":req.user.cartRel})
         }else{
@@ -69,7 +69,7 @@ router.delete('/clearcart',auth,async(req,res)=>{
 // DELETE 
 router.delete('/delete-cart-item/:id',auth,async(req,res)=>{
     try{
-    console.log("Delete Cart Item by ID",req.params.id)
+   // console.log("Delete Cart Item by ID",req.params.id)
     const deleteCart = await Cart.findOneAndDelete({
         _id:req.params.id,owner:req.user._id
     })

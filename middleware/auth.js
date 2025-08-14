@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken')
 const User = require('../model/userModel')
 
 const auth = async(req,res,next)=>{
-    console.log("Auth middleware is called")
-    console.log("text",req.header('Authorization'))
+    //console.log("Auth middleware is called")
+    //console.log("text",req.header('Authorization'))
 try{
     if(!req.header('Authorization')){
         return res.send({message:"Authorization Header is Missing"})
@@ -26,12 +26,12 @@ try{
 const conditionalAuth = (req,res,next)=>{
     if(req.header('Authorization')){
         // if Authorazation is there,call auth
-        console.log("conditional Auth")
+        // console.log("conditional Auth")
         return auth(req,res,next)
       
     }else{
         // if missing pls go to next
-        console.log("else part")
+      //  console.log("else part")
         return next()
     }
     

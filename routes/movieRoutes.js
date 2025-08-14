@@ -10,7 +10,7 @@ router.post('/addmovie',auth,async(req,res)=>{
             ...req.body, //making the copy of req.body
             owner:req.user._id // this one I need to update
         })
-        console.log(req.body)
+        //console.log(req.body)
         if(!movieData){res.status(401).send({message:"Movie cannot be added"})}
         await movieData.save()
         res.status(200).send({movieData:movieData,message:"Movie has been added successfully"})
@@ -23,10 +23,10 @@ router.post('/addmovie',auth,async(req,res)=>{
 //GET  with Auth
 router.get('/specificmovie',auth,async(req,res)=>{
     try{
-        console.log(req.user._id);
+        //console.log(req.user._id);
         if(req.user){
         let getAddedMovie =  await req.user.populate("movieRel");
-        console.log("getAddedMovie",getAddedMovie);
+       // console.log("getAddedMovie",getAddedMovie);
         if(getAddedMovie){
             res.send({"getAddedMovie":req.user.movieRel})
        }else{
@@ -53,12 +53,12 @@ router.get('/movie',async(req,res)=>{
 
 //UPDATE
 router.put('/updatemovie/:id',auth,async(req,res)=>{
-    console.log("from Backend",req.params.id, req.user._id,req.body)
+   // console.log("from Backend",req.params.id, req.user._id,req.body)
     const updateMovie = await Movie.findOneAndUpdate(
         {_id:req.params.id,owner:req.user._id},
         req.body,{new:true, runValidators:true})
      try{
-        console.log(updateMovie,"updatemovie")
+       // console.log(updateMovie,"updatemovie")
         if(!updateMovie){
         return res.send({message:"Can't update the Movie, please check again"})
          }
@@ -88,7 +88,7 @@ router.get('/movie/:id',async(req,res)=>{
 //DELETE
 router.delete('/deletemovie/:id',auth,async(req,res)=>{
     try{
-        console.log("Delete Movie by ID",req.params.id)
+        //console.log("Delete Movie by ID",req.params.id)
         const deleteMovie = await Movie.findOneAndDelete({
             _id:req.params.id,owner:req.user._id
         })

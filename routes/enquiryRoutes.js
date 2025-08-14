@@ -71,10 +71,10 @@ router.post('/contact', conditionalAuth, async (req, res) => {
     //Get specific Enquiry Data
     router.get('/specific-enquiry',auth,async(req,res)=>{
          try{
-        console.log("specific Enquiry",req.user._id)
+       // console.log("specific Enquiry",req.user._id)
         if(req.user){
           let getAddedEnquiry = await req.user.populate("enquiryRel")
-          console.log("specificEnquiryData",getAddedEnquiry) 
+         // console.log("specificEnquiryData",getAddedEnquiry) 
           if(getAddedEnquiry){
                 res.send({"getEnquiry":req.user.enquiryRel})
           }else{
@@ -93,7 +93,7 @@ router.post('/contact', conditionalAuth, async (req, res) => {
     router.put('/updateenquiry/:id',auth,async(req,res)=>{
         const updateEnquiry = await Enquiry.findOneAndUpdate({_id:req.params.id,owner:req.user._id},req.body,{new:true, runValidators:true})
        try{
-            console.log("updateEnquiry",updateEnquiry)
+           // console.log("updateEnquiry",updateEnquiry)
             if(!updateEnquiry){
             return res.send({message:"Can't update the Enquiry, please check again"})
              }
