@@ -6,7 +6,7 @@ const {conditionalAuth} = require('../middleware/auth')
 
 // AddCart
 router.post('/addcart',auth,async(req,res)=>{
-    //  try{
+     try{
         const cartData = new Cart({
             ...req.body,
             owner:req.user._id
@@ -18,21 +18,21 @@ router.post('/addcart',auth,async(req,res)=>{
     }else{
           return  res.send({message:"This movie is already added"})
         }    
-    // }catch(e){
-        // res.status(500).send({message:"Some internal error"})
-        console.log("error",e.code) // e >> entire messages show, e.code >> only error code show, // "e" is object
+    }catch(e){
+    // res.status(500).send({message:"Some internal error"})
+      //  console.log("error",e.code) // e >> entire messages show, e.code >> only error code show, // "e" is object
         if (e.code==11000){
            return  res.send({message:"This is a duplicated key"})
         }else{
             return res.send({message:"some internal error"})
         }
     }
-// }
+ }
 )
 
 // GetCart - 
 router.get('/cart',conditionalAuth,async(req,res)=>{
-    // try{
+     try{
     // console.log(req.user._id);
     if(req.user){
         const getCart = await req.user.populate("cartRel")
@@ -45,9 +45,9 @@ router.get('/cart',conditionalAuth,async(req,res)=>{
     }else{
         res.send({message:"User not found, signin failed!"})
     }
-    // }catch(e){
-    //     res.send({message:"Some internal error"})
-    // }
+    }catch(e){
+        res.send({message:"Some internal error"})
+    }
 })
 
 //RemoveCart

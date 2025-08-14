@@ -109,19 +109,48 @@ router.get('/profile',auth,async(req,res)=>{
 
 
 //update profile
-router.put('/profile/:id',auth,async(req,res)=>{
-    // try{
-        console.log("Update Profile",req.user._id)
-        if(req.user){
-            const updateUser = await User.findOneAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
-            if(!updateUser){
-                res.send({message:"User Not Found"})
-            }
-        }res.send("updateUser",updateUser)            
-    // }catch(e){
-    //     res.send({message:"Some Internal Error"})
-    // }
-})
+// router.put('/profile/:id',auth,async(req,res)=>{
+//     // try{
+//         console.log("Update Profile",req.user._id)
+//         if(req.user){
+//             const updateUser = await User.findOneAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
+//             if(!updateUser){
+//                 res.send({message:"User Not Found"})
+//             }
+//         }res.send("updateUser",updateUser)            
+//     // }catch(e){
+//     //     res.send({message:"Some Internal Error"})
+//     // }
+// })
+
+router.put('/profile/:id', auth, async (req, res) => {
+  try {
+    if (req.user._id.toString() !== req.params.id) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    const allowedFields = ["name", "lastname", "gender", "phone_number", "email"];
+    const updates = allowedFields.reduce((obj, field) => {
+      if (req.body[field] !== undefined) obj[field] = req.body[field];
+      return obj;
+    }, {});
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      updates,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) return res.status(404).json({ message: "User not found" });
+
+    res.json({ message: "Profile updated successfully", user: updatedUser });
+
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 
 
 module.exports=router
